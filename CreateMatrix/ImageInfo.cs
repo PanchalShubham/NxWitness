@@ -33,7 +33,7 @@ public class ImageInfo
         Tags.Add($"docker.io/panchalshubham/{Name.ToLower()}:{prefixTag}");
 
         // GitHub Container Registry
-        Tags.Add($"ghcr.io/panchalshubham/{Name.ToLower()}:{prefixTag}");
+        Tags.Add($"containers-lab.pkg.github.com/panchalshubham/{Name.ToLower()}:{prefixTag}");
     }
 
     public static List<ImageInfo> CreateImages(List<ProductInfo> productList)
