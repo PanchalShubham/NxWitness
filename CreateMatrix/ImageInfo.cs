@@ -30,10 +30,10 @@ public class ImageInfo
         var prefixTag = string.IsNullOrEmpty(tagPrefix) ? tag : $"{tagPrefix}-{tag}";
 
         // Docker Hub
-        Tags.Add($"docker.io/ptr727/{Name.ToLower()}:{prefixTag}");
+        Tags.Add($"docker.io/panchalshubham/{Name.ToLower()}:{prefixTag}");
 
         // GitHub Container Registry
-        Tags.Add($"ghcr.io/ptr727/{Name.ToLower()}:{prefixTag}");
+        Tags.Add($"ghcr.io/panchalshubham/{Name.ToLower()}:{prefixTag}");
     }
 
     public static List<ImageInfo> CreateImages(List<ProductInfo> productList)
