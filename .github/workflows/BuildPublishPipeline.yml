@@ -6,16 +6,8 @@ name: "Build and Publish Docker Images"
 # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#on
 on:
   push:
-    branches: [main, develop]
-    paths-ignore: [README.md]
   pull_request:
-    branches: [main]
   workflow_dispatch:
-  schedule:
-    # https://crontab.guru/
-    # Rebuild 2am every Monday, LSIO rebuilds on Friday's
-    # TODO: Figure out how to build main and develop vs. just the default branch
-    - cron: "0 2 * * MON"
 
 # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobs
 jobs:
@@ -86,20 +78,12 @@ jobs:
         uses: docker/setup-buildx-action@v2
 
       # https://github.com/marketplace/actions/docker-login
-      - name: "Login to Docker Hub"
-        uses: docker/login-action@v2
-        with:
-          registry: docker.io
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-
-      # https://github.com/marketplace/actions/docker-login
       - name: "Login to GitHub Container Registry"
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GH_PAT }}
 
       # https://github.com/marketplace/actions/build-and-push-docker-images
       - name: "Build and Push Images"
@@ -139,4 +123,4 @@ jobs:
           ICON: "github"
           STATUS: ${{ steps.date.outputs.date }}
           COLOR: "blue"
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
