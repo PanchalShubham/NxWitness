@@ -94,7 +94,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.GH_PAT }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       # https://github.com/marketplace/actions/build-and-push-docker-images
       - name: "Build and Push Images"
@@ -134,4 +134,4 @@ jobs:
           ICON: "github"
           STATUS: ${{ steps.date.outputs.date }}
           COLOR: "blue"
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
